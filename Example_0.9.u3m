@@ -1,0 +1,185 @@
+{    
+	"schema": "0.9",
+    "custom": {
+		"Vizoo": {
+			"xtexversion": "182.0",
+			"device": "xTex v2",
+			"camera": "Nikon D810",
+			"lens": "Nikkor 60mm",
+			"user": "Anna",
+			"fabrictype": "Twill"
+		},
+		"Browzwear": {
+			"physics": "path to physics file",
+			"spread": 0.5
+		}
+    },
+    "material": {
+		"id": "{45d231aa-96a0-4d94-9aae-4a99fae0e32a}",
+		"modified": "2018-07-16T10:40:00+02:00",
+		"name": "Example_0.9",
+		"created": "2018-07-16T12:38:00+02:00",
+		"description": "",
+        "back": null,
+        "front": {
+            "shader": "Principled",
+            "alpha": {
+                "constant": 0,
+                "texture": {
+                    "factor": 1,
+                    "offset": 0,
+                    "image": {
+                        "dpi": 1005,
+                        "height": 11.1195,
+                        "path": "textures/Example_0.9_ALPHA.jpg",
+                        "repeat": {
+                            "mode": "normal",
+                            "rotation": 0
+                        },
+                        "width": 12.1759
+                    }
+                }
+            },
+			"anisotropy_value": {
+				"constant": 0,
+				"texture": null
+            },
+            "anisotropy_rotation": {
+				"constant": 0,
+				"texture": null
+            },
+            "basecolor": {
+                "constant": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0
+                },
+                "texture": {
+                    "mode": "add",
+                    "image": {
+                        "dpi": 1005,
+                        "height": 11.1195,
+                        "path": "textures/Example_0.9_BASE.jpg",
+                        "repeat": {
+                            "mode": "normal",
+                            "rotation": 0
+                        },
+                        "width": 12.1759
+                    },
+                    "factor": {
+                        "b": 1,
+                        "g": 1,
+                        "r": 1
+                    }
+                }
+            },
+			"clearcoat_value": {
+                "constant": 0,
+                "texture": null
+            },
+			"clearcoat_normal": {
+                "constant":0,
+                "texture": null
+            },
+			"clearcoat_roughness": {
+                "constant": 0,
+                "texture": null
+            },
+            "ior": {
+                "constant": 0,
+                "texture": null
+            },
+            "metalness": {
+                "constant": 0,
+                "texture": {
+                    "factor": 1,
+                    "offset": 0,
+                    "image": {
+                        "dpi": 1005,
+                        "height": 11.1195,
+                        "path": "textures/Example_0.9_MTL.jpg",
+                        "repeat": {
+                            "mode": "normal",
+                            "rotation": 0
+                        },
+                        "width": 12.1759
+                    }
+                }
+            },
+            "normal": {
+                "constant":0,
+                "texture": {
+                    "factor": 1,
+					"offset":0,
+                    "image": {
+                        "dpi": 1005,
+                        "height": 11.1195,
+                        "path": "textures/Example_0.9_NRM.jpg",
+                        "repeat": {
+                            "mode": "normal",
+                            "rotation": 0
+                        },
+                        "width": 12.1759
+                    }
+                }
+            },
+			"displacement": {
+                "constant":0,
+                "texture": null
+            },
+            "roughness": {
+                "constant": 0,
+                "texture": {
+                    "factor": 1,
+                    "offset": 0,
+                    "image": {
+                        "dpi": 1005,
+                        "height": 11.1195,
+                        "path": "textures/Example_0.9_ROUGH.jpg",
+                        "repeat": {
+                            "mode": "normal",
+                            "rotation": 0
+                        },
+                        "width": 12.1759
+                    }
+                }
+            },
+            "sheen_value": {
+                "constant": 0,
+                "texture": null
+            },
+            "sheen_tint": {
+                "constant": 0,
+                "texture": null
+            },
+			"specular_value": {
+                "constant": 0,
+                "texture": null
+            },
+            "specular_tint": {
+                "constant": 0,
+                "texture": null
+            },
+			"subsurface_color": {
+                "constant": {
+                        "b": 0,
+                        "g": 0,
+                        "r": 0
+                    },
+				"texture": null
+            },
+			"subsurface_radius": {
+                "constant": 0,
+                "texture": null
+            },
+			"subsurface_value": {
+                "constant": 0,
+                "texture": null
+            },
+            "transmission": {
+                "constant": 0,
+                "texture": null
+            }
+        }
+    }
+}
