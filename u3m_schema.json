@@ -20,6 +20,7 @@
           "maximum":1
         }
       },
+      "additionalProperties":false,
       "required":[
         "r",
         "g",
@@ -34,6 +35,10 @@
           "minimum":0
         },
         "height":{
+          "type":"number",
+          "minimum":0
+        },
+        "dpi":{
           "type":"number",
           "minimum":0
         },
@@ -56,10 +61,18 @@
                 "mirror_xy"
               ]
             }
-          }
+          },
+          "additionalProperties":false,
+          "required":[
+            "rotation",
+            "mode"
+            ]
         }
       },
+      "additionalProperties":false,
       "required":[
+        "repeat",
+        "dpi",
         "path",
         "width",
         "height"
@@ -98,6 +111,7 @@
               "$ref":"#/definitions/image"
             }
           },
+          "additionalProperties":false,
           "required":[
             "factor",
             "mode",
@@ -105,6 +119,7 @@
           ]
         }
       },
+      "additionalProperties":false,
       "required":[
         "constant",
         "texture"
@@ -135,6 +150,7 @@
               "$ref":"#/definitions/image"
             }
           },
+          "additionalProperties":false,
           "required":[
             "factor",
             "offset",
@@ -142,6 +158,7 @@
           ]
         }
       },
+      "additionalProperties":false,
       "required":[
         "constant",
         "texture"
@@ -256,10 +273,15 @@
           "$ref":"#/definitions/visualisation"
         }
       },
+      "additionalProperties":false,
       "required":[
         "name",
         "id",
-        "created"
+        "created",
+        "modified",
+        "front",
+        "back",
+        "description"
       ]
     },
     "custom":{
@@ -269,8 +291,10 @@
       ]
     }
   },
+  "additionalProperties":false,
   "required":[
     "schema",
-    "material"
+    "material",
+    "custom"
   ]
 }
