@@ -1,5 +1,5 @@
 {    
-	"schema": "0.9",
+	"schema": "1.0",
     "custom": {
 		"Vizoo": {
 			"xtexversion": "182.0",
@@ -22,7 +22,7 @@
 		"description": "",
         "back": null,
         "front": {
-            "shader": "Principled",
+            "shader": "principled",
             "alpha": {
                 "constant": 0,
                 "texture": {
