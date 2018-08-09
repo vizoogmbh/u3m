@@ -231,7 +231,9 @@
           "$ref":"#/definitions/texture_and_color"
         },
         "shader":{
-          "type":"string"
+          "enum":[
+                "principled"
+              ]
         }
       },
       "additionalProperties":false,
@@ -241,7 +243,9 @@
   "type":"object",
   "properties":{
     "schema":{
-      "type":"string"
+      "enum":[
+        "1.0"
+        ]
     },
     "material":{
       "type":"object",
