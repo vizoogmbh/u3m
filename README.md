@@ -7,5 +7,5 @@ Right now, different vendors output their digital materials either in a propriet
 
 Split into three parts, the U3M format manages to be flexible enough to embrace new input as well as manage your personal company data, yet structured enough to provide a reliable visualization. For a more detailed overview, take a look at the Unified3DMaterial Documentation on here. 
 
-If you want to have a conversation, discuss changes, give feedback, please also join our Slack channel https://u3m.slack.com/
+If you want to have a conversation, discuss changes, give feedback, simply add an Issue to the Github page
 
