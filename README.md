@@ -11,5 +11,5 @@ If you want to have a conversation, discuss changes, give feedback, simply add a
 
 ## License
 
-GNU GENERAL PUBLIC LICENSE
+[GNU General Public License v3.0] (LICENSE)
 
