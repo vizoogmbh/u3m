@@ -9,3 +9,7 @@ Split into three parts, the U3M format manages to be flexible enough to embrace 
 
 If you want to have a conversation, discuss changes, give feedback, simply add an Issue to the Github page
 
+## License
+
+GNU GENERAL PUBLIC LICENSE
+
