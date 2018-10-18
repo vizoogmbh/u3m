@@ -1,4 +1,4 @@
-# u3m
+# U3M
 Unified 3D Material
 
 Thank you for coming to the Github Page of U3M and working with us on it during these early stages!
