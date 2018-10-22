@@ -1,3 +1,6 @@
+
+![U3M Logo](http://u3m.info/_src/logo_small.png)
+
 # U3M
 Unified 3D Material
 
