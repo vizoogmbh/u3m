@@ -23,9 +23,7 @@ The custom section is the dynamic framework that makes interoperability possible
 There is no predefined schema for this part, therefore it has to be read & written as it is, without any changes. The exception is your own, proprietary custom section. 
 
 ## Examples
-
-A few examples of u3m files with textures: 
-https://vizoo.sharepoint.com/:f:/g/Eq9UaYaqWehEsNduuTsHgvQBufLeRpYzIXERsWXwLXWEOQ?e=22AcNI
+[A few examples of u3m files with textures](https://vizoo.sharepoint.com/:f:/g/Eq9UaYaqWehEsNduuTsHgvQBufLeRpYzIXERsWXwLXWEOQ?e=22AcNI "U3M Examples on Sharepoint")
 
 ## License
 
