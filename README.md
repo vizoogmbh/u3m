@@ -1,7 +1,7 @@
 
-![U3M Logo](http://u3m.info/_src/logo_small.png)
+![U3M Logo](http://u3m.info/_src/logo_smallest_text.png)
 
-# U3M
+
 Unified 3D Material
 
 Thank you for coming to the Github Page of U3M and working with us on it during these early stages!
