@@ -29,7 +29,7 @@ There is no predefined schema for this part, therefore it has to be read & writt
 
 GNU General Public License v3.0 
 
-## u3m wiki
+## U3M wiki
 
 https://github.com/vizoogmbh/u3m/wiki
 
