@@ -27,7 +27,7 @@ There is no predefined schema for this part, therefore it has to be read & writt
 
 ## License
 
-GNU General Public License v3.0 
+BSD 3-Clause License
 
 ## U3M wiki
 
