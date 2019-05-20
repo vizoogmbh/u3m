@@ -1,5 +1,5 @@
 
-![U3M Logo](http://u3m.info/_src/logo_smallest_text.png)
+![U3M Logo](https://www.u3m.info/wp-content/uploads/2019/02/u3m_logo.png)
 
 
 Unified 3D Material
