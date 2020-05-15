@@ -35,12 +35,12 @@ recommendations for the custom sections:
     - your software must handle broken or missing custom data (it may warn the user, but must not reject the file)
 
 recommendations for compatibility:
-    - load everything from u3m 1.0 the newest version of the spec
-    - store it as the lowest possible version, e.g. if nothing added in u3m1.1 is required, save it as u3m1.0
+    - load everything from u3m 1.0 to the newest version of the spec
+    - store it as the lowest possible version, e.g. if nothing added in u3m 1.1 is required, save it as u3m 1.0
     - you may warn the user, if any of his/her actions causes an "upgrade" to a later version
     - you may keep the version you loaded, even if the file could be saved in a lower version
     - you may let the user choose a version
-    - you should not mix versions, e.g. store u3m1.0 files in u3ma1.1
+    - you should not mix versions, e.g. store u3m 1.0 files in u3ma 1.1
 
 legal:
     - the specifications of all file formats linked in the common section is part of the u3m specification
