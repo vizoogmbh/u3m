@@ -1,0 +1,99 @@
+common additional information for all file formats,
+specifics for u3m and u3ma can be found in their respective files
+
+
+FOR ALL FILE FORMATS DESCRIBED HERE:
+    - files that do not adhere this specification to the point are malformed
+    - malformed files may be rejected upon loading or the user has to be warned about them
+    - compatible software must not produce malformed files -> if you encounter a malformed file either reject it upon loading or fix it (but do not damage it further)
+    - parts you're not allowed to touch/that are not understand by you (Custom section i'm looking at you) have to be kept unchanged
+    - you are not allowed to remove files that are not referenced in the common section
+    - you must keep the folder structure
+    - a single exception is: stripping
+        removing everything NOT referenced in the common sections & removing everything in the custom sections 
+        -> this option is only present to allow transfer of files without disclosing unwanted information, and should thus be ONLY BE USED FOR THIS SPECIFIC USECASE,
+           not for everyday work, as it might impede with the performance of u3m compliant programs and lead to irreversible information loss
+    - software that accesses another company's custom section for any purpose other than making an EXACT copy without that company's consent, is to be considered malformed and broken
+    - in case of dispute between examples & spec, the spec wins
+    - Relative paths must match the regex specified in the end of this file
+    - Never touch or peek into another company's custom section without their permission & them knowing - NEVER EVER, or you'll lock yourself to their releases and changes or make your clients unhappy by breaking compatibility to older/other files
+    - Try to avoid referencing external data in your custom section, as someone else may remove that external data - and if you have to, place them in their own file and use a descriptive name (e.g. vizoo_custom/vizoo_custom_extra_data.bin) so no one else drops it/overwrites it accidentally
+    - All files referenced in the common section must have an open specification, so if you want to have your data included there, you'll have to specify & open it to everyone
+
+colors:
+    - Each compatible software must honor colorprofiles in color images (e.g. basecolor map) and ignore colorprofiles in data images (e.g. normal map)
+        => keep the profile in the image, or convert to working color space
+        => Standard colorspace is sRGB, D65 10° (http://www.color.org/profiles/sRGB2014.icc !MIND THE LICENSE!)
+        => If no profile is found but a profile is required use the Standard colorspace defined above
+    - all calculations on colors must happen in linear rgb space & are specified for normalized values in the range [0, 1]
+
+recommendations for the custom sections:
+    - store them as encrypted base64 encoded string, so no other company can by mistake or evil intention modify your custom data
+        - not meant to hold sensitive data, just to prevent unintended access and hinder unfair business tactics
+        - gives the owner of the custom section a way to ensure integrity of the stored data
+        - gives the owner of the custom section a way to share data with another company without having to share it with everyone
+    - your software must handle broken or missing custom data (it may warn the user, but must not reject the file)
+
+recommendations for compatibility:
+    - load everything from u3m 1.0 the newest version of the spec
+    - store it as the lowest possible version, e.g. if nothing added in u3m1.1 is required, save it as u3m1.0
+    - you may warn the user, if any of his/her actions causes an "upgrade" to a later version
+    - you may keep the version you loaded, even if the file could be saved in a lower version
+    - you may let the user choose a version
+    - you should not mix versions, e.g. store u3m1.0 files in u3ma1.1
+
+legal:
+    - the specifications of all file formats linked in the common section is part of the u3m specification
+    - these specifications are put under the same or are more permissible & compatible license then u3m itself (aside from png, tiff, jpeg & json)
+
+paths:
+    based on:
+    https://www.boost.org/doc/libs/1_72_0/libs/filesystem/doc/portability_guide.htm
+    https://github.com/boostorg/filesystem/blob/develop/src/portability.cpp
+    additional info from
+    https://en.wikipedia.org/wiki/Filename
+    https://en.wikipedia.org/wiki/Path_(computing)
+    https://en.wikipedia.org/wiki/Environment_variable
+
+    portable posix:
+        [0-9a-zA-Z\._-]{1:255}
+
+    posix:
+        [^\x00\/]+
+
+    windows:
+        [^\x00-\x1F<>:"\/\\|]{0:254}[^\x00-\x1F<>:"\/\\|\.\x20]
+
+        reserved names (case insensitive, suffixes are ignored):
+            CON
+            PRN
+            AUX
+            CLOCK$
+            NUL
+            COM[1-9]
+            LPT[1-9]
+
+    forbid directory changers (for security reasons)
+        \.|\.\.|\~
+
+    forbid environment variables (for security reasons)
+        [^\$\%]
+
+    -> leads to the following regex for a file or directory name:
+        - must not match ^(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))$
+        - must match     ^([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|])$
+
+    regexes:
+    -> #dir: (?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/)
+    -> #file: (?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)
+
+    -> directory-path: ^(#dir/)+
+    -> file-path: ^(#dir/)*#file$
+
+    regex for files:
+    ^((?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/))*(?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)$
+    see https://www.regextester.com/?fam=115492
+    
+    regex for directories:
+    ^((?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/))+$
+    see 

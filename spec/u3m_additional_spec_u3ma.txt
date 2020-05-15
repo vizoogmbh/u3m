@@ -1,0 +1,92 @@
+U3MA:
+Binary format (little endian byte order!) to pack a single u3m
+based subset of zip (https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT)
+
+overall structure:
+    //like ordinary zip
+    <file entry 1>
+    <file entry 2>
+    .
+    .
+    .
+    <file entry n>
+    <central directory header 1>
+    <central directory header 2>
+    .
+    .
+    .
+    <central directory header n>
+    <end of central directory record>
+
+<central directory header> //same as zip central directory (with some restrictions)
+    UINT32    centralFileHeaderSignature  //must have the value 0x02014b50
+    UINT16    versionMadeBy               //lower byte should be 63, but may differ. upper byte must be 0 for windows FAT (always use this setting no matter what OS/Filesystem you're on!) => you should read 0x00?? and write 0x003F
+    UINT16    versionNeededToExtract      //must be 0x14
+    UINT16    generalPurposeBitFlag       //only bits 1 & 2 may be set for compressed files (0b00 for normal compression, 0b01 maximum compression, 0b10 fast compression, 0b11 super fast compression), bit 11 (EFS) must be always set, other bits MUST BE ZERO
+    UINT16    compressionMethod           //must be either 0 (no compression) or 8 (compressed with DELFATE), other values are not allowed, must be 0 for directories
+    UINT16    lastModFileTime             //time part of a MS-DOS time (in UTC!)
+    UINT16    lastModFileDate             //date part of a MS-DOS time (in UTC!)
+    UINT32    crc32                       //with reversed polynomial 0xedb88320 and starting value 0xffffffff (same as used by ZIP)
+    UINT32    compressedSize              //size of the compressed data (0 for directories, must equal uncompressedSize if data is not compressed)
+    UINT32    uncompressedSize            //size of the uncompressed data (0 for directories)
+    UINT16    fileNameLength              //length of the utf8 encoded filename (no terminal zero!)
+    UINT16    extraFieldLength            //must be 0
+    UINT16    fileCommentLength           //must be 0
+    UINT16    diskNumberStart             //must be 0
+    UINT16    internalFileAttributes      //must be 0
+    UINT32    externalFileAttributes      //must be 0
+    UINT32    relativeOffsetOfLocalHeader //offset from the start of the file to the corresponding <file entry>
+    UINT8[]   fileName                    //fileNameLength bytes of the UTF8 encoded filename (NO TERMINAL ZERO), must be a relative path as defined for the rest of u3m & unique within the archive, must not start with a slash and must end with a slash for directories, must not end with a slash for files
+
+<file entry> //same as a zip file entry (with some restrictions)
+    <local file header>
+    <file data (either raw or compressed, depending on flags)´
+
+<local file header> //same as zip local file header (with some restrictions)
+    UINT32    localFileHeaderSignature //must have the value 0x04034b50
+    UINT16    versionNeededToExtract   //must be 0x14
+    UINT16    generalPurposeBitFlag    //must have the same value as the corresponding <central directory header>.generalPurposeBitFlag
+    UINT16    compressionMethod        //must have the same value as the corresponding <central directory header>.compressionMethod
+    UINT16    lastModFileTime          //must have the same value as the corresponding <central directory header>.lastModFileTime
+    UINT16    lastModFileDate          //must have the same value as the corresponding <central directory header>.lastModFileDate
+    UINT32    crc32                    //must have the same value as the corresponding <central directory header>.crc32
+    UINT32    compressedSize           //must have the same value as the corresponding <central directory header>.compressedSize
+    UINT32    uncompressedSize         //must have the same value as the corresponding <central directory header>.uncompressedSize
+    UINT16    fileNameLength           //must have the same value as the corresponding <central directory header>.fileNameLength
+    UINT16    extraFieldLength         //must be 0
+    UINT8[]   fileName                 //must have the same value as the corresponding <central directory header>.fileName
+
+<end of central directory record> //same as zip end of central directory record (with some restrictions)
+    UINT32    endOfCentralDirSignature                            //must have the value 0x06054b50
+    UINT16    numberOfThisDisk                                    //must be 0
+    UINT16    numberOfTheDiskWithTheStartOfTheCentralDirectory    //must be 0
+    UINT16    totalNumberOfEntriesInTheCentralDirectoryOnThisDisk //number of <file entries> in this u3ma
+    UINT16    totalNumberOfEntriesInTheCentralDirectory           //number of <file entries> in this u3ma
+    UINT32    sizeOfTheCentralDirectory                           //size of the central directory
+    UINT32    offsetOfTheCentralDirectory                         //offset of the central directory from the start of the file
+    UINT16    zipFileCommentLength                                //must be 0
+    
+changes from the original zip secification:
+    - explicitly disabled encryption (may be added later)
+    - explicitly disabled zip64 (may be added later)
+    - explicitly disabled splitting in multiple files
+    - explicitly disable file attributes
+    - explicitly restricted the possible generatePurposeBitFlags
+    - explicitly forced compression to be either deflate or off (more options may be added later)
+    - times must be explicitly in UTC
+    - explicitly forced only single ntfsExtraData record
+    - explicitly disabled support or file comments
+    - explicitly disabled splitting into multiple files
+    - explicitly disabled internal attributes
+    - explicitly restricted the supported external file attributes
+    - explicitly forced UTF8 filenames
+    - explicitly disabled file comments
+    - explicitly disallowed data before or after U3MA data
+    - explicitly disallowed data description header
+
+additionally:
+    - no data may come before <file entry 1> or after <end of central directory record>
+    - if a time is not known, the value should be set to a sensible default (e.g. creation time of the archive)
+    - filenames in the archive must be relative paths, unique, non-empty & utf-8 encoded and must not contain \0 chars
+    - some legacy u3ma's may be zip files with other specifications, conforming software is allowed to read these, BUT IS NOT ALLOWED TO WRITE THESE
+    - non-ordinary files like hidden, system, temporary or virtual files have to be skipped and must not end up in the archive
