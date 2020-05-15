@@ -1,0 +1,106 @@
+U3M:
+Baseline image formats that every U3M compatible software must support:
+    - jpeg:
+        - sequential, huffman 8 bit rgb
+        - progressive huffman 8 bit rgb
+    - png:
+        - 8/16bit rgb/rgba
+    - tiff:
+        - baseline, compression either none, huffman, LZW or rle, 8/16 bit, rgb/rgba
+        - no fancy stuff like embedded jpeg or multiple images in one file
+
+Dpi in material and images should match.
+Same goes for the dpi that can be calculated from width & height and the image size.
+Same is also true for the data from the physics or other sections that are mirrored in referenced files
+Conformant software should ensure that all duplicate values match, if they don't default the corresponding values from the u3m
+A valid U3M must contain at least one visual ("front", "back" or "side") or physics, a file with neither physics nor visuals is malformed
+
+image.repeat modes explained:
+    "normal":    wrap (place the material repeatedly on the material) in x and y direction
+    "mirror_x":  mirror (place the material repeatedly on the material, but each full repeat the textures are flipped) in x and wrap in y direction
+    "mirror_y":  wrap in x and mirror in y direction
+    "mirror_xy": mirror in x and y direction
+
+texture_and_color.texture.mode controls the blending of the texture (a) with the factor (b):
+    "add":      a + b
+    "subtract": a - b
+    "multiply": a * b
+    "divide":   a / b, if b == 0, the result should be 1.0
+    "max":      max(a, b)
+    "min":      min(a, b)
+    "overlay":  2 * a * b if a < 0.5, 1 - 2 * (1 - a) * (1 - b) otherwise
+
+The texture_and_color, texture_and_normal and texture_and_number elements have a constant and a texture member
+    - if software supports using a texture in this shader parameter, it should use the texture
+    - if software does support the the shader parameter, but not as a texture, it can fall back to the constant
+    -> software chooses one, not both!
+    -> to ensure maximal compatibility, software should always write a constant that matches the texture somewhat, e.g. the average of the final texture value after factors are applied
+    -> to keep maximal precision, software that does not use the texture should not allow changes to the constant, as it might be 
+
+texture_and_normal.texture encodes the normals in the range [0, 1], therefore use the following formulas to convert
+    float3 decodeNormal(float3 raw)
+    {
+        return raw * 2.0f - 1.0f;
+    }
+
+    float3 encodeNormal(float3 normal)
+    {
+        return (normal + 1.0f) / 2.0f;
+    }
+
+Normals should be renormalized according to the following formula:
+    float3 renormalize(float3 vec)
+    {
+        return vec / length(vec);
+    }
+
+    if the length(vec) is 0, the result is undefined, but we suggest to default to the up-vector float3(0, 0, 1)
+
+The preview is intended to be used for human display only (e.g. as thumbnail in a materialdatabase)
+    - you may use a custom implementation (e.g. rendering the material on a sphere), but it should be some kind of rendering
+    - in case of doubt use the following default formula (an approximate rendering of the material on a plane if viewed from above)
+    - MUST SHOW THE MATERIAL
+    - if front, back and/or side are given, multiple previews may show the multiple facettes of the material
+        - we suggest to display all of them fused into a single preview
+  
+    uniform float normalAmount; //scaling factor for normals, defaults to 0.5
+    uniform float specAmount; //scaling factor for specular, defaults to 0.9
+    float4 calc_preview_pixel(float3 color /*linearized u3m color space*/, float3 normal, float metalness, float roughness, float alpha)
+    {
+        float4 ret(color.r, color.g, color.b, alpha);
+        //normalize normal
+        normal = normalize(normal);
+        //diffuse part
+        float normalAdd = 1.0f;
+        if(normalAmount > 0.0f) {
+            normalAdd = min(normal.x, normal.y) * 2;
+            ret.xyz = ret.xy * (1.0f - normalAmount) + normalAmount * ret.xyz * normalAdd;
+        }
+        //specular part
+        if(specAmount > 0.0f) {
+            float non_metalness = ((1.0f - metalness) * 2.0f) - 1.0f; // -1 if metal, 1 if non-metal
+            ret.xyz = min(1.0f, max(0.0f, ret.xyz + non_metalness * (specAmount * normalAdd * (1.0f - roughness))));
+        }
+        return ret;
+    }
+    
+Factor and offset are to be applied to every image before it is consumed by anything (renderer/...) with the following formulas
+    finalNumericPixel(x, y) = offset + average(imagePixel(x, y)) * factor
+    finalColorPixel(x, y) = linearize(convertToU3MColorSpace(imagePixel(x, y))) * factor
+
+metadata:
+    - each file referenced in there must have a completely public specification
+    - this specification becomes part of the u3m standard and is owned by the corresponding company
+    - interested companies have to submit their specification as pull request to https://github.com/vizoogmbh/u3m
+	- keep metadata-entries you don't change or don't know
+
+extensible enums (composition_part.type, construction.type, material_type.type):
+    - have an enum (.type) for internal purposes of the loading programs
+    - have a name (.name) for display purposes
+    - have a special value ("other") for types that are not part of the enum
+    - software should use the best matching value from the enum and only fallback to "other" if no matching value can be found
+    - reading this from an ui perspective could be implemented as display of the (localized) .type value and/or the .name depending on whether it is not null and .type is "other"
+    - setting this from an ui perspective this could be implemented as a dropdown with all enum values given and an extra textfield at the bottom that allows the specification of a "new" type that is then set for .name and .type to "other"
+    - if an already preset value from the enum is used, .name should be null
+    - if "other" is given, .name must not be null
+    --> compromise between flexibility (via "other" for less commonly used values) and compatibility (via enum for commonly used values)

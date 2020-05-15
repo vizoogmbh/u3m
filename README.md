@@ -12,24 +12,6 @@ Split into three parts, the U3M format manages to be flexible enough to embrace 
 
 If you want to have a conversation, discuss changes, give feedback, simply add an Issue to the Github page
 
-### Schema
-Part 1 of u3m is the version number of the file format. Always make sure it matches the corresponding U3M-schema. This will improve compatibility, and later allow for backward compatibility as well. 
-
-### Material
-The material section is the core of the U3M. It contains meta data, visual data for front and back, and hopefully soon physical, supplier and construction data as well. It comes with a predefined and standardized structure and data-types, so every party reading & writing the format can rely on it. This will enable and improve the interoperability between applpications.
-
-### Custom
-The custom section is the dynamic framework that makes interoperability possible. It enables every technology vendor to add the proprietary data they specifically require to read & write the files, as well as providing brands and suppliers a place to store production or workflow information. 
-There is no predefined schema for this part, therefore it has to be read & written as it is, without any changes. The exception is your own, proprietary custom section. 
-
-## Examples
-[A few examples of u3m files with textures](https://vizoo.sharepoint.com/:f:/g/Eq9UaYaqWehEsNduuTsHgvQBufLeRpYzIXERsWXwLXWEOQ?e=22AcNI "U3M Examples on Sharepoint")
-
 ## License
 
 BSD 3-Clause License
-
-## U3M wiki
-
-https://github.com/vizoogmbh/u3m/wiki
-
