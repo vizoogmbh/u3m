@@ -357,7 +357,7 @@
                     "$ref": "#/definitions/color_rgb"
                 },
                 "texture": {
-                    "#ref": "#/definitions/color_texture"
+                    "$ref": "#/definitions/color_texture"
                 }
             },
             "additionalProperties": false,
@@ -384,8 +384,7 @@
             },
             "additionalProperties": false,
             "required": [
-                "factor",
-                "offset",
+                "scale",
                 "image"
             ]
         },
