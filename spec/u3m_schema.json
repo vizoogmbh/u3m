@@ -47,7 +47,7 @@
                 "string",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "$ref": "#/definitions/relative_file_path"
         },
         "length_measurement": {
@@ -61,7 +61,7 @@
                 "null"
             ],
             "minimum": 0,
-            "default": "null",
+            "default": null,
             "description": "length in mm"
         },
         "optional_mass_per_area_measurement": {
@@ -70,7 +70,7 @@
                 "null"
             ],
             "minimum": 0,
-            "default": "null",
+            "default": null,
             "description": "weight per area in g/m2"
         },
         "composition_part": {
@@ -162,7 +162,7 @@
                 "object",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "properties": {
                 "type": {
                     "enum": [
@@ -197,7 +197,7 @@
                 "object",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "properties": {
                 "type": {
                     "enum": [
@@ -625,7 +625,7 @@
                 "object",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "properties": {
                 "alpha": {
                     "$ref": "#/definitions/texture_and_number_01_1"
@@ -729,7 +729,7 @@
                 "object",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "properties": {
                 "thickness": {
                     "$ref": "#/definitions/optional_length_measurement"
@@ -755,7 +755,7 @@
                         "object",
                         "null"
                     ],
-                    "default": "null",
+                    "default": null,
                     "properties": {
                         "parts": {
                             "type": "array",
@@ -793,27 +793,10 @@
                 "object",
                 "null"
             ],
-            "default": "null",
+            "default": null,
             "properties": {
-                "beproduct": {
-                    "$ref": "#/definitions/optional_relative_file_path",
-                    "description": "relative path to beproduct metadata file"
-                },
-                "centric": {
-                    "$ref": "#/definitions/optional_relative_file_path",
-                    "description": "relative path to centric metadata file"
-                },
-                "swatchbook": {
-                    "$ref": "#/definitions/optional_relative_file_path",
-                    "description": "relative path to swatchbook metadata file"
-                }
             },
-            "additionalProperties": true,
-            "required": [
-                "beproduct",
-                "centric",
-                "swatchbook"
-            ]
+            "additionalProperties": true
         }
     },
     "type": "object",
