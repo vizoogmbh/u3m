@@ -1,5 +1,3 @@
-Round 1 for the U3M 1.1 specification.
-
 This folder contains:
     - readme.txt:
         this file
@@ -7,12 +5,6 @@ This folder contains:
         a list of all changes between U3M 1.0 and U3M 1.1
     - u3m.pdf:
         non-technical documentation
-    - CODEOWNERS:
-        a file for github
-    - LICENSE:
-        license under which everything herein is put
-    - README.md:
-        readme for github
     - spec/
         the specification files for the technical details
         - u3m_schema.json
