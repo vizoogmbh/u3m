@@ -3,6 +3,10 @@ This folder contains:
         this file
     - changes.txt:
         a list of all changes between U3M 1.0 and U3M 1.1
+    - u3m.ico
+		recomended icon for u3m files
+	- u3ma.ico
+		recomended icon for u3ma files
     - u3m.pdf:
         non-technical documentation
     - spec/
@@ -24,5 +28,15 @@ This folder contains:
             if there is any conflict between the results of this tool and the u3ma specification, please drop us a note on https://github.com/vizoogmbh/u3m,
             so we can fix the bug. In such case, please stick to the u3ma specification
             uses zlib https://zlib.net/ for compression/decompression
+	- physics/
+		contains the specification and examples for the fab physics file
+		- physics_example.json:
+			example file for physics (contains measurements and a custom section)
+		- raw_physics_example.json
+			example file for physics (contains only measurements)
+		- raw_and_custom_physics_example.json
+			example file for physics (contains measurements and a custom section)
+		- Raw Physics Documentation JSON.pdf
+			documentation for the physics file
 
 If you have any questions or suggestions feel free to reach out via https://github.com/vizoogmbh/u3m or email to info@vizoo3d.com
