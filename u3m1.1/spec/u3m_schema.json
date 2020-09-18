@@ -1,0 +1,874 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {
+        "color_rgb": {
+            "type": "object",
+            "properties": {
+                "r": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                },
+                "g": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                },
+                "b": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                }
+            },
+            "description": "color value in u3m standard colorspace",
+            "additionalProperties": false,
+            "required": [
+                "r",
+                "g",
+                "b"
+            ]
+        },
+        "uuid4": {
+            "description": "UUID4 (variant-1) represented as string with or without {} - see https://en.wikipedia.org/wiki/Universally_unique_identifier",
+            "type": "string",
+            "pattern": "^((([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-4([0-9a-fA-F]){3}-[89AaBb]([0-9a-fA-F]){3}-([0-9a-fA-F]){12})|(\\{([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-4([0-9a-fA-F]){3}-[89AaBb]([0-9a-fA-F]){3}-([0-9a-fA-F]){12}\\}))$"
+        },
+        "relative_file_path": {
+            "description": "relative path (from this file) to an other file",
+            "type": "string",
+            "pattern": "^((?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)$"
+        },
+        "optional_relative_file_path": {
+            "description": "relative path (from this file) to an other file or \"null\" if empty",
+            "type": "string",
+            "default": "null",
+            "pattern": "^((null)|(((?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)))$"
+        },
+        "length_measurement": {
+            "type": "number",
+            "minimum": 0,
+            "description": "length in mm"
+        },
+        "optional_length_measurement": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 0,
+            "default": null,
+            "description": "length in mm"
+        },
+        "optional_mass_per_area_measurement": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 0,
+            "default": null,
+            "description": "weight per area in g/m2"
+        },
+        "composition_part": {
+            "type": "object",
+            "properties": {
+                "ratio": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "type": {
+                    "enum": [
+                        "unknown",
+                        "other",
+                        "Abaca",
+                        "Acetate",
+                        "Acrylic",
+                        "Alfa",
+                        "Alginate",
+                        "Alpaca",
+                        "Aluminium",
+                        "Angora",
+                        "Aramid",
+                        "Beaver",
+                        "Camelhair",
+                        "Cashmere",
+                        "Cotton",
+                        "Cupro",
+                        "Elastane",
+                        "Guanaco",
+                        "Hardware",
+                        "Hemp",
+                        "Jute",
+                        "Linen",
+                        "Llama",
+                        "Lycra",
+                        "Lyocell",
+                        "Meril",
+                        "Metallic Fibre",
+                        "Metallised Polyester",
+                        "Micropolypch",
+                        "Modacrylic",
+                        "Modal Cotton",
+                        "Modal",
+                        "Mohair",
+                        "Neoprene",
+                        "Nylon",
+                        "Organic cotton",
+                        "Polyacryl",
+                        "Polyamid",
+                        "Polyester",
+                        "Polyethylene",
+                        "Polypropylen",
+                        "Polytaslan",
+                        "Ramie",
+                        "Rayon",
+                        "Recycled Cotton",
+                        "Recycled Polyamide",
+                        "Recycled Polyester",
+                        "Silk",
+                        "Spandex",
+                        "Tactel",
+                        "Triacetate",
+                        "Vicugna",
+                        "Vinyl",
+                        "Virgin Wool",
+                        "Wild Silk",
+                        "Wool",
+                        "Yack"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "user defined additional name e.g. bio-cotton"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "ratio",
+                "type",
+                "name"
+            ]
+        },
+        "material_type": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null,
+            "properties": {
+                "type": {
+                    "enum": [
+                        "unknown",
+                        "other",
+                        "Artwork",
+                        "Elastics",
+                        "Knit",
+                        "Leather",
+                        "Metal",
+                        "Seam",
+                        "Wood",
+                        "Woven"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "user defined additional name e.g. veal-leather"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name"
+            ]
+        },
+        "construction": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null,
+            "properties": {
+                "type": {
+                    "enum": [
+                        "unknown",
+                        "other",
+                        "1 x 1 flatknit",
+                        "1 x 1 rib",
+                        "2 x 2 rib",
+                        "4 x 2 rib",
+                        "Canvas",
+                        "Dobby",
+                        "Doubleknit",
+                        "Doubleweave",
+                        "Engineered",
+                        "Fleece",
+                        "French terry",
+                        "Interlock",
+                        "Jacquard",
+                        "Mesh",
+                        "Oxford",
+                        "Pique",
+                        "Plain weave",
+                        "Polarfleece",
+                        "Poplin",
+                        "Raschel",
+                        "Ripstop",
+                        "Satin",
+                        "Single jersey",
+                        "Spacer",
+                        "TafFeta",
+                        "Terry loop",
+                        "Towel",
+                        "Tricot",
+                        "Twill - left hand (S)",
+                        "Twill - right hand (Z)",
+                        "Twill",
+                        "Velour",
+                        "Waffle"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "user defined additional name e.g. woven"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name"
+            ]
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "$ref": "#/definitions/length_measurement"
+                },
+                "height": {
+                    "$ref": "#/definitions/length_measurement"
+                },
+                "dpi": {
+                    "type": "object",
+                    "properties": {
+                        "x": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "y": {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "x",
+                        "y"
+                    ]
+                },
+                "path": {
+                    "$ref": "#/definitions/relative_file_path",
+                    "description": "relative path to the image file"
+                },
+                "repeat": {
+                    "type": "object",
+                    "properties": {
+                        "rotation": {
+                            "type": "number"
+                        },
+                        "mode": {
+                            "enum": [
+                                "normal",
+                                "mirror_x",
+                                "mirror_y",
+                                "mirror_xy"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "rotation",
+                        "mode"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "repeat",
+                "dpi",
+                "path",
+                "width",
+                "height"
+            ]
+        },
+        "color_texture": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "mode": {
+                    "enum": [
+                        "add",
+                        "subtract",
+                        "multiply",
+                        "divide",
+                        "max",
+                        "min",
+                        "overlay"
+                    ],
+                    "default": "multiply"
+                },
+                "factor": {
+                    "$ref": "#/definitions/color_rgb",
+                    "description": "additional factor, in u3m standard colorspace"
+                },
+                "image": {
+                    "$ref": "#/definitions/image",
+                    "description": "color image, has to be converted to u3m standard colorspace before use"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "factor",
+                "image",
+                "mode"
+            ]
+        },
+        "texture_and_color": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "$ref": "#/definitions/color_rgb"
+                },
+                "texture": {
+                    "$ref": "#/definitions/color_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "normal_texture": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "scale": {
+                    "type": "number",
+                    "default": 1.0,
+                    "description": "scaling factor, multiplied to x & y component before renormalization"
+                },
+                "image": {
+                    "$ref": "#/definitions/image",
+                    "description": "3 channel image without colorspace (do not convert)!, may need renormalizing in the shader"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "scale",
+                "image"
+            ]
+        },
+        "texture_and_normal": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "object",
+                    "properties": {
+                        "x": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1,
+                            "default": 0
+                        },
+                        "y": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1,
+                            "default": 0
+                        },
+                        "z": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1,
+                            "default": 1
+                        }
+                    },
+                    "description": "3 component vector, may need renormalizing in the shader",
+                    "additionalProperties": false,
+                    "required": [
+                        "x",
+                        "y",
+                        "z"
+                    ]
+                },
+                "texture": {
+                    "$ref": "#/definitions/normal_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "scalar_texture": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "factor": {
+                    "type": "number",
+                    "default": 1.0
+                },
+                "offset": {
+                    "type": "number",
+                    "default": 0.0
+                },
+                "image": {
+                    "$ref": "#/definitions/image",
+                    "description": "grayscale image without colorspace (do not convert)!, if multiple channels are given has to be converted to grayscale by averaging the 3 channels"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "factor",
+                "offset",
+                "image"
+            ]
+        },
+        "texture_and_number_01_1": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "texture_and_number_01_0": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "texture_and_number_0": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "default": 0
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "texture_and_number_1d4": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "default": 1.4
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "texture_and_number_0d7": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "default": 0.7
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "texture_and_number_0d5": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "constant": {
+                    "type": "number",
+                    "default": 0.5
+                },
+                "texture": {
+                    "$ref": "#/definitions/scalar_texture"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "constant",
+                "texture"
+            ]
+        },
+        "preview_image": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "width": {
+                    "$ref": "#/definitions/length_measurement"
+                },
+                "height": {
+                    "$ref": "#/definitions/length_measurement"
+                },
+                "dpi": {
+                    "type": "object",
+                    "properties": {
+                        "x": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "y": {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "x",
+                        "y"
+                    ]
+                },
+                "path": {
+                    "$ref": "#/definitions/relative_file_path",
+                    "description": "relative path to the image file"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "dpi",
+                "path",
+                "width",
+                "height"
+            ]
+        },
+        "visualisation": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null,
+            "properties": {
+                "alpha": {
+                    "$ref": "#/definitions/texture_and_number_01_1"
+                },
+                "anisotropy_value": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "anisotropy_rotation": {
+                    "$ref": "#/definitions/texture_and_number_01_0",
+                    "description": "value is in percent, to get to degree, multiply by 360"
+                },
+                "clearcoat_value": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "clearcoat_normal": {
+                    "$ref": "#/definitions/texture_and_normal"
+                },
+                "clearcoat_roughness": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "ior": {
+                    "$ref": "#/definitions/texture_and_number_1d4"
+                },
+                "metalness": {
+                    "$ref": "#/definitions/texture_and_number_01_0"
+                },
+                "normal": {
+                    "$ref": "#/definitions/texture_and_normal"
+                },
+                "displacement": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "roughness": {
+                    "$ref": "#/definitions/texture_and_number_0d7"
+                },
+                "sheen_value": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "sheen_tint": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "specular_value": {
+                    "$ref": "#/definitions/texture_and_number_0d5",
+                    "description": "value is defined on the segment [0%, 8%] -> 0.0 equals 0%, and 1.0 equals 8%"
+                },
+                "specular_tint": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "subsurface_radius": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "subsurface_value": {
+                    "$ref": "#/definitions/texture_and_number_0"
+                },
+                "transmission": {
+                    "$ref": "#/definitions/texture_and_number_01_0"
+                },
+                "basecolor": {
+                    "$ref": "#/definitions/texture_and_color"
+                },
+                "subsurface_color": {
+                    "$ref": "#/definitions/texture_and_color"
+                },
+                "shader": {
+                    "enum": [
+                        "principled"
+                    ]
+                },
+                "preview": {
+                    "$ref": "#/definitions/preview_image"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "alpha",
+                "anisotropy_value",
+                "anisotropy_rotation",
+                "clearcoat_value",
+                "clearcoat_normal",
+                "clearcoat_roughness",
+                "ior",
+                "metalness",
+                "normal",
+                "displacement",
+                "roughness",
+                "sheen_value",
+                "sheen_tint",
+                "specular_value",
+                "specular_tint",
+                "subsurface_radius",
+                "subsurface_value",
+                "transmission",
+                "basecolor",
+                "subsurface_color",
+                "shader",
+                "preview"
+            ]
+        },
+        "physics": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null,
+            "properties": {
+                "thickness": {
+                    "$ref": "#/definitions/optional_length_measurement"
+                },
+                "weight": {
+                    "$ref": "#/definitions/optional_mass_per_area_measurement"
+                },
+                "devices": {
+                    "type": "object",
+                    "properties": {
+                        "fab": {
+                            "$ref": "#/definitions/optional_relative_file_path",
+                            "description": "relative path to the fab physics file"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "fab"
+                    ]
+                },
+                "composition": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "default": null,
+                    "properties": {
+                        "parts": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/composition_part"
+                            },
+                            "minItems": 1,
+                            "description": "must have at least 1 value & ratio must sum up to 1"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "parts"
+                    ]
+                },
+                "material_type": {
+                    "$ref": "#/definitions/material_type"
+                },
+                "construction": {
+                    "$ref": "#/definitions/construction"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "thickness",
+                "weight",
+                "composition",
+                "devices",
+                "material_type",
+                "construction"
+            ]
+        },
+        "metadata": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null,
+            "properties": {
+            },
+            "additionalProperties": true
+        }
+    },
+    "type": "object",
+    "properties": {
+        "schema": {
+            "enum": [
+                "1.1"
+            ]
+        },
+        "material": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/uuid4"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "description": {
+                    "type": "string",
+                    "default": ""
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "front": {
+                    "$ref": "#/definitions/visualisation",
+                    "description": "if null, but back is not null, use back, if side is not null, use side, otherwise no visuals are available"
+                },
+                "back": {
+                    "$ref": "#/definitions/visualisation",
+                    "description": "if null, the values from front are used instead"
+                },
+                "side": {
+                    "$ref": "#/definitions/visualisation",
+                    "description": "if null, the values from front are used instead"
+                },
+                "physics": {
+                    "$ref": "#/definitions/physics"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "id",
+                "created",
+                "modified",
+                "front",
+                "back",
+                "side",
+                "physics",
+                "metadata",
+                "description"
+            ]
+        },
+        "custom": {
+            "type": [
+                "object",
+                "null"
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "schema",
+        "material",
+        "custom"
+    ]
+}

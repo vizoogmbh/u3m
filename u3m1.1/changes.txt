@@ -1,0 +1,53 @@
+*.u3m:
+    added:
+        - dpi x/y
+        - physics
+        - generic thickness/weight
+        - clarifying notes
+        - units to width & height
+        - side material
+        - common preview
+        - metadata
+        - specification for colorspaces
+        - additional notes
+        - a recommendation to encrypt your custom section
+        - specification on how and when offset & factor are to be applied
+        - specification on how to load the different maps
+        - specification for repeat modes
+        - specification for format of relative paths
+        - explicitly defined paths to be posix paths
+        - added a clarifying note on duplicate entries
+        - added a clarifying note on metadata entries
+        - added a type for uuids
+        - added a type for relative paths
+        - added a regex for paths
+        - wording on backward compatibility
+        - specified calculations are for normalized values
+        - added explanation for constant & texture
+        - explanation for texture_and_color.texture.mode
+        - color_rgb is now in u3m standard colorspace
+        - added texture_and_normal for normals
+        - notes to texture_and_normal and texture_and_number that says to ignore colorspaces
+        - note on renormalizing normals
+        - note on decoding/encoding normals
+        - added defaults & ranges to the schema
+
+    changed:
+        - allowed access to other companies custom section IF THEY AGREED TO IT
+        - fixed UUID4 regex from the one at https://www.regextester.com/93857 to one matching an uuid4 variant1 and the delimiters properly (https://www.regextester.com/?fam=115486)
+        - factored parts from texture_and_number into scalar_texture
+        - factored parts from texture_and_normal into normal_texture
+        - factored parts from texture_and_color into color_texture
+        - disabled "null" on texture_and_number
+        - disabled "null" on texture_and_normal
+        - disabled "null" on texture_and_color
+        - replaced texture_and_number with bounded types with default value (e.g. texture_and_number_01_1 for a number from [0, 1] with default value 1)
+        - anisotropy_rotation is now in percent (0 == 0°, 1 == 360°) instead of "probably degree"
+
+*.u3ma:
+    added:
+        - first specification based on zip
+
+won't do:
+    - color name (no way to extract properly from colormaps on all supported software, no usefull way to describe a multicolored material e.g. rainbow)
+    - scaling factor (not needed, as physical size is known and physical size of avatar should also be known)

@@ -1,0 +1,22 @@
+- Handle TODOs:
+    u3m
+        - add machine readable well defined materials e.g. cotton
+        - add machine readable well defined material types e.g. leather
+        - add machine readable well defined construction e.g. woven
+        - add further measurement kits
+        - add further common physical properties
+        - add further plms
+
+POSTPONED:
+    - BW. U3M supports also 3D trims (suggestion 1.2) – not clarified yet
+    - Allow for HUE shift in u3mg?
+    - Allow special colors (e.g. gold) in u3mg?
+    - Allow colors outside [0-1] in u3mg results?
+    - Physics in u3mg?
+
+RESOLVED:
+    - Add separate meta file & URL for volatile metadata (e.g. price)? - moved to extra files to be negotiated by the plm companies
+    - code an u3ma checker/packer/unpacker together (for bw)
+    - regex for paths in schema
+    - check uuid4 regex
+    - Update documentation ( propose min and max values, if needed )
