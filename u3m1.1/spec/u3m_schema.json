@@ -147,6 +147,27 @@
                     "description": "user defined additional name e.g. bio-cotton"
                 }
             },
+            "if": {
+                "properties": {
+                    "type": {
+                        "enum": ["other"]
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "else": {
+                "properties": {
+                    "name": {
+                        "type": "null"
+                    }
+                }
+            },
             "additionalProperties": false,
             "required": [
                 "ratio",
@@ -181,6 +202,27 @@
                         "null"
                     ],
                     "description": "user defined additional name e.g. veal-leather"
+                }
+            },
+            "if": {
+                "properties": {
+                    "type": {
+                        "enum": ["other"]
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "else": {
+                "properties": {
+                    "name": {
+                        "type": "null"
+                    }
                 }
             },
             "additionalProperties": false,
@@ -241,6 +283,27 @@
                         "null"
                     ],
                     "description": "user defined additional name e.g. woven"
+                }
+            },
+            "if": {
+                "properties": {
+                    "type": {
+                        "enum": ["other"]
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "else": {
+                "properties": {
+                    "name": {
+                        "type": "null"
+                    }
                 }
             },
             "additionalProperties": false,
