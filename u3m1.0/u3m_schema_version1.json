@@ -253,7 +253,7 @@
         "id":{
           "description":"UUID4 represented as string with or without {}",
           "type":"string",
-          "pattern":"^({{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}}{0,1})$"
+          "pattern":"^(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})$"
         },
         "name":{
           "type":"string",
