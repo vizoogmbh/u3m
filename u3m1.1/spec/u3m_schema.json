@@ -61,6 +61,24 @@
             "default": null,
             "description": "length in mm"
         },
+        "dpi": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "y": {
+                    "type": "number",
+                    "minimum": 0
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "x",
+                "y"
+            ]
+        },
         "optional_mass_per_area_measurement": {
             "type": [
                 "number",
@@ -259,22 +277,7 @@
                     "$ref": "#/definitions/length_measurement"
                 },
                 "dpi": {
-                    "type": "object",
-                    "properties": {
-                        "x": {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        "y": {
-                            "type": "number",
-                            "minimum": 0
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "x",
-                        "y"
-                    ]
+                    "$ref": "#/definitions/dpi"
                 },
                 "path": {
                     "$ref": "#/definitions/relative_file_path",
@@ -587,22 +590,7 @@
                     "$ref": "#/definitions/length_measurement"
                 },
                 "dpi": {
-                    "type": "object",
-                    "properties": {
-                        "x": {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        "y": {
-                            "type": "number",
-                            "minimum": 0
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "x",
-                        "y"
-                    ]
+                    "$ref": "#/definitions/dpi"
                 },
                 "path": {
                     "$ref": "#/definitions/relative_file_path",
