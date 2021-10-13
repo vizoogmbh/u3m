@@ -832,6 +832,22 @@
                     "$ref": "#/definitions/metadata"
                 }
             },
+            "not": {
+                "properties": {
+                    "front": {
+                        "type": "null"
+                    },
+                    "back": {
+                        "type": "null"
+                    },
+                    "side": {
+                        "type": "null"
+                    },
+                    "physics": {
+                        "type": "null"
+                    }
+                }
+            },
             "additionalProperties": false,
             "required": [
                 "name",
