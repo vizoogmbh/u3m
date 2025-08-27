@@ -21,13 +21,6 @@ This folder contains:
             additional notes to u3m_schema.json
         - u3m_open_questions.txt:
             a list of all open, resolved and postponed questions regarding U3M 1.1
-    - utils/
-        contains additional utilities, mainly to help developers - those files are not part of the specification!
-        - u3machecker.exe:
-            test program to check your generated *.u3ma files or generate *.u3ma files
-            if there is any conflict between the results of this tool and the u3ma specification, please drop us a note on https://github.com/vizoogmbh/u3m,
-            so we can fix the bug. In such case, please stick to the u3ma specification
-            uses zlib https://zlib.net/ for compression/decompression
 	- physics/
 		contains the specification and examples for the fab physics file
 		- physics_example.json:
