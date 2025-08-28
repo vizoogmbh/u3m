@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema",
     "definitions": {
         "color_rgb": {
             "type": "object",
@@ -168,7 +168,7 @@
             "if": {
                 "properties": {
                     "type": {
-                        "enum": ["other"]
+                        "const": "other"
                     }
                 }
             },
@@ -225,7 +225,7 @@
             "if": {
                 "properties": {
                     "type": {
-                        "enum": ["other"]
+                        "const": "other"
                     }
                 }
             },
@@ -306,7 +306,7 @@
             "if": {
                 "properties": {
                     "type": {
-                        "enum": ["other"]
+                        "const": "other"
                     }
                 }
             },
@@ -738,9 +738,7 @@
                     "$ref": "#/definitions/texture_and_color"
                 },
                 "shader": {
-                    "enum": [
-                        "principled"
-                    ]
+                    "const": "principled"
                 },
                 "preview": {
                     "$ref": "#/definitions/preview_image"
@@ -842,17 +840,14 @@
                 "null"
             ],
             "default": null,
-            "properties": {
-            },
+            "properties": {},
             "additionalProperties": true
         }
     },
     "type": "object",
     "properties": {
         "schema": {
-            "enum": [
-                "1.1"
-            ]
+            "const": "1.1"
         },
         "material": {
             "type": "object",

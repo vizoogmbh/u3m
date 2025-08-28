@@ -1,220 +1,217 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "definitions": {
-    "hwSerialNumber": {
-      "description": "Hardware serial number.",
-      "type": "integer"
-    },
-    "hwVersion": {
-      "description": "Hardware version.",
-      "type": "integer"
-    },
-    "testVersion": {
-      "description": "Version used for this test.",
-      "type": "integer"
-    },
-    "time": {
-      "description": "Time stamp in time_t (time_t base time is the number of seconds from midnight, January 1, 1970).",
-      "type": "integer"
-    },
-    "width": {
-      "description": "The width of the measured fabric.",
-      "type": "integer"
-    },
-    "length": {
-      "description": "The length of the measured fabric.",
-      "type": "number"
-    },
-    "samplesTree": {
-      "description": "The measurement's raw data: pairs of distance and force.",
-      "type": "array",
-      "items": {
-        "type": "array",
-        "items": {
-          "type": "number"
-        }
-      }
-    },
-    "measurementPart": {
-      "type": "object",
-      "properties": {
-        "freq": {
-          "description": "The sampling rate of the FAB machine.",
-          "type": "integer"
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "definitions": {
+        "hwSerialNumber": {
+            "description": "Hardware serial number.",
+            "type": "integer"
+        },
+        "hwVersion": {
+            "description": "Hardware version.",
+            "type": "integer"
+        },
+        "testVersion": {
+            "description": "Version used for this test.",
+            "type": "integer"
+        },
+        "time": {
+            "description": "Time stamp in time_t (time_t base time is the number of seconds from midnight, January 1, 1970).",
+            "type": "integer"
         },
         "width": {
-          "$ref": "#/definitions/width"
+            "description": "The width of the measured fabric.",
+            "type": "integer"
         },
         "length": {
-          "$ref": "#/definitions/length"
-        },        
-        "samplesTree": {
-          "$ref": "#/definitions/samplesTree"
-        },
-        "hwSerialNumber": {
-          "$ref": "#/definitions/hwSerialNumber"
-        },
-        "hwVersion": {
-          "$ref": "#/definitions/hwVersion"
-        },
-        "testVersion": {
-          "$ref": "#/definitions/testVersion"
-        },
-        "time": {
-          "$ref": "#/definitions/time"
-        }
-      },
-      "required": [
-        "freq",
-        "width",
-        "length",
-        "samplesTree",
-        "hwSerialNumber",
-        "hwVersion",
-        "testVersion",
-        "time"
-      ]
-    },
-    "measurement": {
-      "type": "object",
-      "properties": {
-        "D1": {
-          "description": "Downward bend measure at 2 cm distance.",
-          "$ref": "#/definitions/measurementPart"
-        },
-        "D2": {
-          "description": "Downward bend measure at 8 cm distance.",
-          "$ref": "#/definitions/measurementPart"
-        },
-        "S1": {
-          "description": "Stretch measure at 2 cm distance.",
-          "$ref": "#/definitions/measurementPart"
-        },
-        "S2": {
-          "description": "Stretch measure at 8 cm distance.",
-          "$ref": "#/definitions/measurementPart"
-        },
-        "U1": {
-          "description": "Upward bend measure at 2 cm distance.",
-          "$ref": "#/definitions/measurementPart"
-        },
-        "hwSerialNumber": {
-          "$ref": "#/definitions/hwSerialNumber"
-        },
-        "hwVersion": {
-          "$ref": "#/definitions/hwVersion"
-        },
-        "testVersion": {
-          "$ref": "#/definitions/testVersion"
-        },
-        "time": {
-          "$ref": "#/definitions/time"
-        },
-        "width": {
-          "$ref": "#/definitions/width"
-        }
-      },
-      "required": [
-        "D1",
-        "D2",
-        "S1",
-        "S2",
-        "U1"
-      ]
-    },
-    "thicknessMeasurement": {
-      "type": "object",
-      "properties": {
-        "freq": {
-          "description": "The sampling rate of the FAB machine.",
-          "type": "integer"
-        },
-        "width": {
-          "$ref": "#/definitions/width"
+            "description": "The length of the measured fabric.",
+            "type": "number"
         },
         "samplesTree": {
-          "$ref": "#/definitions/samplesTree"
+            "description": "The measurement's raw data: pairs of distance and force.",
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number"
+                }
+            }
         },
-        "hwSerialNumber": {
-          "$ref": "#/definitions/hwSerialNumber"
+        "measurementPart": {
+            "type": "object",
+            "properties": {
+                "freq": {
+                    "description": "The sampling rate of the FAB machine.",
+                    "type": "integer"
+                },
+                "width": {
+                    "$ref": "#/definitions/width"
+                },
+                "length": {
+                    "$ref": "#/definitions/length"
+                },
+                "samplesTree": {
+                    "$ref": "#/definitions/samplesTree"
+                },
+                "hwSerialNumber": {
+                    "$ref": "#/definitions/hwSerialNumber"
+                },
+                "hwVersion": {
+                    "$ref": "#/definitions/hwVersion"
+                },
+                "testVersion": {
+                    "$ref": "#/definitions/testVersion"
+                },
+                "time": {
+                    "$ref": "#/definitions/time"
+                }
+            },
+            "required": [
+                "freq",
+                "width",
+                "length",
+                "samplesTree",
+                "hwSerialNumber",
+                "hwVersion",
+                "testVersion",
+                "time"
+            ]
         },
-        "hwVersion": {
-          "$ref": "#/definitions/hwVersion"
+        "measurement": {
+            "type": "object",
+            "properties": {
+                "D1": {
+                    "description": "Downward bend measure at 2 cm distance.",
+                    "$ref": "#/definitions/measurementPart"
+                },
+                "D2": {
+                    "description": "Downward bend measure at 8 cm distance.",
+                    "$ref": "#/definitions/measurementPart"
+                },
+                "S1": {
+                    "description": "Stretch measure at 2 cm distance.",
+                    "$ref": "#/definitions/measurementPart"
+                },
+                "S2": {
+                    "description": "Stretch measure at 8 cm distance.",
+                    "$ref": "#/definitions/measurementPart"
+                },
+                "U1": {
+                    "description": "Upward bend measure at 2 cm distance.",
+                    "$ref": "#/definitions/measurementPart"
+                },
+                "hwSerialNumber": {
+                    "$ref": "#/definitions/hwSerialNumber"
+                },
+                "hwVersion": {
+                    "$ref": "#/definitions/hwVersion"
+                },
+                "testVersion": {
+                    "$ref": "#/definitions/testVersion"
+                },
+                "time": {
+                    "$ref": "#/definitions/time"
+                },
+                "width": {
+                    "$ref": "#/definitions/width"
+                }
+            },
+            "required": [
+                "D1",
+                "D2",
+                "S1",
+                "S2",
+                "U1"
+            ]
         },
-        "testVersion": {
-          "$ref": "#/definitions/testVersion"
-        },
-        "time": {
-          "$ref": "#/definitions/time"
+        "thicknessMeasurement": {
+            "type": "object",
+            "properties": {
+                "freq": {
+                    "description": "The sampling rate of the FAB machine.",
+                    "type": "integer"
+                },
+                "width": {
+                    "$ref": "#/definitions/width"
+                },
+                "samplesTree": {
+                    "$ref": "#/definitions/samplesTree"
+                },
+                "hwSerialNumber": {
+                    "$ref": "#/definitions/hwSerialNumber"
+                },
+                "hwVersion": {
+                    "$ref": "#/definitions/hwVersion"
+                },
+                "testVersion": {
+                    "$ref": "#/definitions/testVersion"
+                },
+                "time": {
+                    "$ref": "#/definitions/time"
+                }
+            },
+            "required": [
+                "freq",
+                "width",
+                "samplesTree",
+                "hwSerialNumber",
+                "hwVersion",
+                "testVersion",
+                "time"
+            ]
         }
-      },
-      "required": [
-        "freq",
-        "width",
-        "samplesTree",
-        "hwSerialNumber",
-        "hwVersion",
-        "testVersion",
-        "time"
-      ]
-    }
-  },
-
-  "type": "object",
-  "properties": {
-    "raw_data": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "B": {
-          "description": "Biased Grainline.",
-          "$ref": "#/definitions/measurement"
+    },
+    "type": "object",
+    "properties": {
+        "raw_data": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "B": {
+                    "description": "Biased Grainline.",
+                    "$ref": "#/definitions/measurement"
+                },
+                "L": {
+                    "description": "Length Grainline.",
+                    "$ref": "#/definitions/measurement"
+                },
+                "T": {
+                    "description": "Thickness",
+                    "$ref": "#/definitions/thicknessMeasurement"
+                },
+                "W": {
+                    "description": "Width Grainline.",
+                    "$ref": "#/definitions/measurement"
+                },
+                "M": {
+                    "description": "Mass (The mass density of the fabric).",
+                    "type": "number"
+                }
+            },
+            "additionalProperties": true,
+            "required": [
+                "B",
+                "L",
+                "T",
+                "W",
+                "M"
+            ]
         },
-        "L": {
-          "description": "Length Grainline.",
-          "$ref": "#/definitions/measurement"
+        "schema": {
+            "type": "string",
+            "const": "1.1"
         },
-        "T": {
-          "description": "Thickness",
-          "$ref": "#/definitions/thicknessMeasurement"
-        },
-        "W": {
-          "description": "Width Grainline.",
-          "$ref": "#/definitions/measurement"
-        },
-        "M": {
-          "description": "Mass (The mass density of the fabric).",
-          "type": "number"
+        "custom": {
+            "type": [
+                "object",
+                "null"
+            ]
         }
-      },
-      "additionalProperties": true,
-      "required": [
-        "B",
-        "L",
-        "T",
-        "W",
-        "M"
-      ]
     },
-    "schema": {
-      "type": "string",
-      "enum": [
-        "1.1"
-      ]
-    },
-    "custom": {
-      "type": [
-        "object",
-        "null"
-      ]
-    }
-  },
-  "additionalProperties": false,
-  "required": [
-    "raw_data",
-    "schema",
-    "custom"
-  ]
+    "additionalProperties": false,
+    "required": [
+        "raw_data",
+        "schema",
+        "custom"
+    ]
 }
