@@ -39,13 +39,13 @@
         "relative_file_path": {
             "description": "relative path (from this file) to an other file",
             "type": "string",
-            "pattern": "^((?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)$"
+            "pattern": "^((?!(\\.\\.|\\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)$"
         },
         "optional_relative_file_path": {
             "description": "relative path (from this file) to an other file or \"null\" if empty",
             "type": "string",
             "default": "null",
-            "pattern": "^((null)|(((?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$\\%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|\\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)))$"
+            "pattern": "^((null)|(((?!(\\.\\.|\\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\.[^\\/]*)?))\\/)([^\\x00-\\x1F<>:\"\\/\\\\|\\$%]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\|\\$%\\.\\x20|]\\/))*(?!(\\.\\.|\\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\\..*)?))$)([^\\x00-\\x1F<>:\"\\/\\\\|]{0,254}[^\\x00-\\x1F<>:\"\\/\\\\\\.\\x20|]$)))$"
         },
         "length_measurement": {
             "type": "number",
