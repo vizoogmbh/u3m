@@ -74,26 +74,26 @@ paths:
             LPT[1-9]
 
     forbid directory changers (for security reasons)
-        \.|\.\.|\~
+        \.|\.\.|~
 
     forbid environment variables (for security reasons)
-        [^\$\%]
+        [^\$%]
 
     -> leads to the following regex for a file or directory name:
-        - must not match ^(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))$
-        - must match     ^([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|])$
+        - must not match ^(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))$
+        - must match     ^([^\x00-\x1F<>:"\/\\|\$%]{0,254}[^\x00-\x1F<>:"\/\\|\$%\.\x20|])$
 
     regexes:
-    -> #dir: (?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/)
-    -> #file: (?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)
+    -> #dir: (?!(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$%]{0,254}[^\x00-\x1F<>:"\/\\|\$%\.\x20|]\/)
+    -> #file: (?!(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)
 
     -> directory-path: ^(#dir/)+
     -> file-path: ^(#dir/)*#file$
 
     regex for files:
-    ^((?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/))*(?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)$
+    ^((?!(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$%]{0,254}[^\x00-\x1F<>:"\/\\|\$%\.\x20|]\/))*(?!(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\..*)?))$)([^\x00-\x1F<>:"\/\\|]{0,254}[^\x00-\x1F<>:"\/\\\.\x20|]$)$
     see https://www.regextester.com/?fam=115492
     
     regex for directories:
-    ^((?!(\.\.|\.|\~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$\%]{0,254}[^\x00-\x1F<>:"\/\\|\$\%\.\x20|]\/))+$
+    ^((?!(\.\.|\.|~|(([cC][oO][nN]|[pP][rR][nN]|[aA][uU][xX]|[cC][lL][oO][cC][kK]\$|[nN][uU][lL]|[cC][oO][mM][1-9]|[lL][pP][tT][1-9])(\.[^\/]*)?))\/)([^\x00-\x1F<>:"\/\\|\$%]{0,254}[^\x00-\x1F<>:"\/\\|\$%\.\x20|]\/))+$
     see 
