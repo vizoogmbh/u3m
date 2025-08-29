@@ -14,6 +14,8 @@ Same goes for the dpi that can be calculated from width & height and the image s
 Same is also true for the data from the physics or other sections that are mirrored in referenced files
 Conformant software should ensure that all duplicate values match, if they don't default the corresponding values from the u3m
 A valid U3M must contain at least one visual ("front", "back" or "side") or physics, a file with neither physics nor visuals is malformed
+All normals are in OpenGL convention
+Displacement map contains a relative distance, with higher values specifying a graeter displacement from the surface towards the camera when viewed from above
 
 image.repeat modes explained:
     "normal":    wrap (place the material repeatedly on the material) in x and y direction
@@ -51,10 +53,9 @@ texture_and_normal.texture encodes the normals in the range [0, 1], therefore us
 Normals should be renormalized according to the following formula:
     float3 renormalize(float3 vec)
     {
+        //if the length(vec) is 0, the result is undefined, but we suggest to default to the up-vector float3(0, 0, 1)
         return vec / length(vec);
     }
-
-    if the length(vec) is 0, the result is undefined, but we suggest to default to the up-vector float3(0, 0, 1)
 
 The preview is intended to be used for human display only (e.g. as thumbnail in a materialdatabase)
     - you may use a custom implementation (e.g. rendering the material on a sphere), but it should be some kind of rendering
